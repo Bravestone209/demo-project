@@ -11,6 +11,18 @@ pipeline {
             }
         }
 
+        stage("environment check") {
+
+            steps {
+                sh '''
+                    whoami
+                    node -v || true
+                    npm -v || true
+                    netlify --version || true
+                '''
+            }
+        }
+
         stage("test") {
 
             steps {
@@ -23,6 +35,7 @@ pipeline {
             steps {
                 echo 'testing the frontend...'
                 echo 'yarn started...'
+
                 nodejs('Node-26.3'){
                     sh 'yarn install'
                 }
@@ -32,7 +45,7 @@ pipeline {
         stage("deploy") {
 
             steps {
-                echo 'deplyonm the application...'
+                echo 'deployment stage...'
             }
         }
     }
