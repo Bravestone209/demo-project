@@ -44,9 +44,27 @@ pipeline {
 
         stage("deploy") {
 
-            steps {
-                echo 'deployment stage...'
+        when {
+            branch 'feature'
+        }
+
+        steps {
+
+            withCredentials([
+                string(
+                    credentialsId: 'netlify-token',
+                    variable: 'NETLIFY_AUTH_TOKEN'
+                )
+            ]) {
+
+                sh '''
+                    netlify deploy \
+                    --dir=. \
+                    --site=528633b7-0b27-47c9-a9aa-923afea6ed4e \
+                    --prod
+                '''
             }
         }
+    }
     }
 }
