@@ -33,7 +33,7 @@ function showData(){
         <div class="card mb-2">
             <div class="card-body d-flex justify-content-between align-items-center">
             <div>
-                <strong>${task.tasks}</strong>
+                <strong>${i+') '+task.tasks}</strong>
                 <small class="text-muted ms-2">${task.date}</small>
             </div>
             <button class="btn btn-sm btn-danger" data-taskId = ${i} onclick="deleteTask(${i})">Delete</button>
